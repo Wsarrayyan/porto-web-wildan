@@ -1,0 +1,11 @@
+{
+  "main": "./index.cjs",
+  "module": "./index.jsx",
+  "solid": "./index.jsx",
+  "exports": {
+    ".": {
+      "default": "./index.jsx",
+      "solid": "./index.jsx"
+    }
+  }
+}

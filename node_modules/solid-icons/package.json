@@ -1,0 +1,744 @@
+{
+  "name": "solid-icons",
+  "version": "1.1.0",
+  "description": "Modern solution for use icons on SolidJS",
+  "author": "Ignacio Zsabo",
+  "license": "MIT",
+  "sideEffects": false,
+  "keywords": [
+    "solidjs",
+    "icons",
+    "pack",
+    "svg",
+    "solid"
+  ],
+  "peerDependencies": {
+    "solid-js": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/x64Bits/solid-icons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/x64Bits/solid-icons/issues"
+  },
+  "homepage": "https://solid-icons.vercel.app",
+  "main": "./lib/index.cjs",
+  "types": "./lib/index.d.ts",
+  "module": "./lib/index.jsx",
+  "unpkg": "./lib/index.cjs",
+  "exports": {
+    ".": {
+      "browser": "./lib/index.js",
+      "types": "./lib/index.d.ts",
+      "node": "./lib/index.cjs",
+      "default": "./lib/index.jsx",
+      "solid": "./lib/index.jsx",
+      "astro": "./lib/index.jsx"
+    },
+    "./ai": {
+      "worker": {
+        "import": {
+          "types": "./ai/index.d.ts",
+          "default": "./ai/index.js"
+        },
+        "require": "./ai/index.cjs",
+        "browser": "./ai/index.js",
+        "node": "./ai/index.js",
+        "default": "./ai/index.js",
+        "solid": "./ai/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./ai/index.d.ts",
+          "default": "./ai/index.js"
+        },
+        "require": "./ai/index.cjs",
+        "browser": "./ai/index.js",
+        "node": "./ai/index.js",
+        "default": "./ai/index.js",
+        "solid": "./ai/index.js"
+      },
+      "node": "./ai/index.js",
+      "development": {
+        "import": {
+          "types": "./ai/index.d.ts",
+          "default": "./ai/index.js"
+        },
+        "require": "./ai/index.cjs",
+        "browser": "./ai/index.js",
+        "node": "./ai/index.js",
+        "default": "./ai/index.js",
+        "solid": "./ai/index.js"
+      },
+      "browser": "./ai/index.js",
+      "import": {
+        "types": "./ai/index.d.ts",
+        "default": "./ai/index.js"
+      },
+      "require": "./ai/index.cjs",
+      "default": "./ai/index.js",
+      "solid": "./ai/index.js"
+    },
+    "./fa": {
+      "worker": {
+        "import": {
+          "types": "./fa/index.d.ts",
+          "default": "./fa/index.js"
+        },
+        "require": "./fa/index.cjs",
+        "browser": "./fa/index.js",
+        "node": "./fa/index.js",
+        "default": "./fa/index.js",
+        "solid": "./fa/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./fa/index.d.ts",
+          "default": "./fa/index.js"
+        },
+        "require": "./fa/index.cjs",
+        "browser": "./fa/index.js",
+        "node": "./fa/index.js",
+        "default": "./fa/index.js",
+        "solid": "./fa/index.js"
+      },
+      "node": "./fa/index.js",
+      "development": {
+        "import": {
+          "types": "./fa/index.d.ts",
+          "default": "./fa/index.js"
+        },
+        "require": "./fa/index.cjs",
+        "browser": "./fa/index.js",
+        "node": "./fa/index.js",
+        "default": "./fa/index.js",
+        "solid": "./fa/index.js"
+      },
+      "browser": "./fa/index.js",
+      "import": {
+        "types": "./fa/index.d.ts",
+        "default": "./fa/index.js"
+      },
+      "require": "./fa/index.cjs",
+      "default": "./fa/index.js",
+      "solid": "./fa/index.js"
+    },
+    "./wi": {
+      "worker": {
+        "import": {
+          "types": "./wi/index.d.ts",
+          "default": "./wi/index.js"
+        },
+        "require": "./wi/index.cjs",
+        "browser": "./wi/index.js",
+        "node": "./wi/index.js",
+        "default": "./wi/index.js",
+        "solid": "./wi/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./wi/index.d.ts",
+          "default": "./wi/index.js"
+        },
+        "require": "./wi/index.cjs",
+        "browser": "./wi/index.js",
+        "node": "./wi/index.js",
+        "default": "./wi/index.js",
+        "solid": "./wi/index.js"
+      },
+      "node": "./wi/index.js",
+      "development": {
+        "import": {
+          "types": "./wi/index.d.ts",
+          "default": "./wi/index.js"
+        },
+        "require": "./wi/index.cjs",
+        "browser": "./wi/index.js",
+        "node": "./wi/index.js",
+        "default": "./wi/index.js",
+        "solid": "./wi/index.js"
+      },
+      "browser": "./wi/index.js",
+      "import": {
+        "types": "./wi/index.d.ts",
+        "default": "./wi/index.js"
+      },
+      "require": "./wi/index.cjs",
+      "default": "./wi/index.js",
+      "solid": "./wi/index.js"
+    },
+    "./fi": {
+      "worker": {
+        "import": {
+          "types": "./fi/index.d.ts",
+          "default": "./fi/index.js"
+        },
+        "require": "./fi/index.cjs",
+        "browser": "./fi/index.js",
+        "node": "./fi/index.js",
+        "default": "./fi/index.js",
+        "solid": "./fi/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./fi/index.d.ts",
+          "default": "./fi/index.js"
+        },
+        "require": "./fi/index.cjs",
+        "browser": "./fi/index.js",
+        "node": "./fi/index.js",
+        "default": "./fi/index.js",
+        "solid": "./fi/index.js"
+      },
+      "node": "./fi/index.js",
+      "development": {
+        "import": {
+          "types": "./fi/index.d.ts",
+          "default": "./fi/index.js"
+        },
+        "require": "./fi/index.cjs",
+        "browser": "./fi/index.js",
+        "node": "./fi/index.js",
+        "default": "./fi/index.js",
+        "solid": "./fi/index.js"
+      },
+      "browser": "./fi/index.js",
+      "import": {
+        "types": "./fi/index.d.ts",
+        "default": "./fi/index.js"
+      },
+      "require": "./fi/index.cjs",
+      "default": "./fi/index.js",
+      "solid": "./fi/index.js"
+    },
+    "./vs": {
+      "worker": {
+        "import": {
+          "types": "./vs/index.d.ts",
+          "default": "./vs/index.js"
+        },
+        "require": "./vs/index.cjs",
+        "browser": "./vs/index.js",
+        "node": "./vs/index.js",
+        "default": "./vs/index.js",
+        "solid": "./vs/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./vs/index.d.ts",
+          "default": "./vs/index.js"
+        },
+        "require": "./vs/index.cjs",
+        "browser": "./vs/index.js",
+        "node": "./vs/index.js",
+        "default": "./vs/index.js",
+        "solid": "./vs/index.js"
+      },
+      "node": "./vs/index.js",
+      "development": {
+        "import": {
+          "types": "./vs/index.d.ts",
+          "default": "./vs/index.js"
+        },
+        "require": "./vs/index.cjs",
+        "browser": "./vs/index.js",
+        "node": "./vs/index.js",
+        "default": "./vs/index.js",
+        "solid": "./vs/index.js"
+      },
+      "browser": "./vs/index.js",
+      "import": {
+        "types": "./vs/index.d.ts",
+        "default": "./vs/index.js"
+      },
+      "require": "./vs/index.cjs",
+      "default": "./vs/index.js",
+      "solid": "./vs/index.js"
+    },
+    "./bs": {
+      "worker": {
+        "import": {
+          "types": "./bs/index.d.ts",
+          "default": "./bs/index.js"
+        },
+        "require": "./bs/index.cjs",
+        "browser": "./bs/index.js",
+        "node": "./bs/index.js",
+        "default": "./bs/index.js",
+        "solid": "./bs/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./bs/index.d.ts",
+          "default": "./bs/index.js"
+        },
+        "require": "./bs/index.cjs",
+        "browser": "./bs/index.js",
+        "node": "./bs/index.js",
+        "default": "./bs/index.js",
+        "solid": "./bs/index.js"
+      },
+      "node": "./bs/index.js",
+      "development": {
+        "import": {
+          "types": "./bs/index.d.ts",
+          "default": "./bs/index.js"
+        },
+        "require": "./bs/index.cjs",
+        "browser": "./bs/index.js",
+        "node": "./bs/index.js",
+        "default": "./bs/index.js",
+        "solid": "./bs/index.js"
+      },
+      "browser": "./bs/index.js",
+      "import": {
+        "types": "./bs/index.d.ts",
+        "default": "./bs/index.js"
+      },
+      "require": "./bs/index.cjs",
+      "default": "./bs/index.js",
+      "solid": "./bs/index.js"
+    },
+    "./bi": {
+      "worker": {
+        "import": {
+          "types": "./bi/index.d.ts",
+          "default": "./bi/index.js"
+        },
+        "require": "./bi/index.cjs",
+        "browser": "./bi/index.js",
+        "node": "./bi/index.js",
+        "default": "./bi/index.js",
+        "solid": "./bi/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./bi/index.d.ts",
+          "default": "./bi/index.js"
+        },
+        "require": "./bi/index.cjs",
+        "browser": "./bi/index.js",
+        "node": "./bi/index.js",
+        "default": "./bi/index.js",
+        "solid": "./bi/index.js"
+      },
+      "node": "./bi/index.js",
+      "development": {
+        "import": {
+          "types": "./bi/index.d.ts",
+          "default": "./bi/index.js"
+        },
+        "require": "./bi/index.cjs",
+        "browser": "./bi/index.js",
+        "node": "./bi/index.js",
+        "default": "./bi/index.js",
+        "solid": "./bi/index.js"
+      },
+      "browser": "./bi/index.js",
+      "import": {
+        "types": "./bi/index.d.ts",
+        "default": "./bi/index.js"
+      },
+      "require": "./bi/index.cjs",
+      "default": "./bi/index.js",
+      "solid": "./bi/index.js"
+    },
+    "./im": {
+      "worker": {
+        "import": {
+          "types": "./im/index.d.ts",
+          "default": "./im/index.js"
+        },
+        "require": "./im/index.cjs",
+        "browser": "./im/index.js",
+        "node": "./im/index.js",
+        "default": "./im/index.js",
+        "solid": "./im/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./im/index.d.ts",
+          "default": "./im/index.js"
+        },
+        "require": "./im/index.cjs",
+        "browser": "./im/index.js",
+        "node": "./im/index.js",
+        "default": "./im/index.js",
+        "solid": "./im/index.js"
+      },
+      "node": "./im/index.js",
+      "development": {
+        "import": {
+          "types": "./im/index.d.ts",
+          "default": "./im/index.js"
+        },
+        "require": "./im/index.cjs",
+        "browser": "./im/index.js",
+        "node": "./im/index.js",
+        "default": "./im/index.js",
+        "solid": "./im/index.js"
+      },
+      "browser": "./im/index.js",
+      "import": {
+        "types": "./im/index.d.ts",
+        "default": "./im/index.js"
+      },
+      "require": "./im/index.cjs",
+      "default": "./im/index.js",
+      "solid": "./im/index.js"
+    },
+    "./io": {
+      "worker": {
+        "import": {
+          "types": "./io/index.d.ts",
+          "default": "./io/index.js"
+        },
+        "require": "./io/index.cjs",
+        "browser": "./io/index.js",
+        "node": "./io/index.js",
+        "default": "./io/index.js",
+        "solid": "./io/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./io/index.d.ts",
+          "default": "./io/index.js"
+        },
+        "require": "./io/index.cjs",
+        "browser": "./io/index.js",
+        "node": "./io/index.js",
+        "default": "./io/index.js",
+        "solid": "./io/index.js"
+      },
+      "node": "./io/index.js",
+      "development": {
+        "import": {
+          "types": "./io/index.d.ts",
+          "default": "./io/index.js"
+        },
+        "require": "./io/index.cjs",
+        "browser": "./io/index.js",
+        "node": "./io/index.js",
+        "default": "./io/index.js",
+        "solid": "./io/index.js"
+      },
+      "browser": "./io/index.js",
+      "import": {
+        "types": "./io/index.d.ts",
+        "default": "./io/index.js"
+      },
+      "require": "./io/index.cjs",
+      "default": "./io/index.js",
+      "solid": "./io/index.js"
+    },
+    "./ri": {
+      "worker": {
+        "import": {
+          "types": "./ri/index.d.ts",
+          "default": "./ri/index.js"
+        },
+        "require": "./ri/index.cjs",
+        "browser": "./ri/index.js",
+        "node": "./ri/index.js",
+        "default": "./ri/index.js",
+        "solid": "./ri/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./ri/index.d.ts",
+          "default": "./ri/index.js"
+        },
+        "require": "./ri/index.cjs",
+        "browser": "./ri/index.js",
+        "node": "./ri/index.js",
+        "default": "./ri/index.js",
+        "solid": "./ri/index.js"
+      },
+      "node": "./ri/index.js",
+      "development": {
+        "import": {
+          "types": "./ri/index.d.ts",
+          "default": "./ri/index.js"
+        },
+        "require": "./ri/index.cjs",
+        "browser": "./ri/index.js",
+        "node": "./ri/index.js",
+        "default": "./ri/index.js",
+        "solid": "./ri/index.js"
+      },
+      "browser": "./ri/index.js",
+      "import": {
+        "types": "./ri/index.d.ts",
+        "default": "./ri/index.js"
+      },
+      "require": "./ri/index.cjs",
+      "default": "./ri/index.js",
+      "solid": "./ri/index.js"
+    },
+    "./si": {
+      "worker": {
+        "import": {
+          "types": "./si/index.d.ts",
+          "default": "./si/index.js"
+        },
+        "require": "./si/index.cjs",
+        "browser": "./si/index.js",
+        "node": "./si/index.js",
+        "default": "./si/index.js",
+        "solid": "./si/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./si/index.d.ts",
+          "default": "./si/index.js"
+        },
+        "require": "./si/index.cjs",
+        "browser": "./si/index.js",
+        "node": "./si/index.js",
+        "default": "./si/index.js",
+        "solid": "./si/index.js"
+      },
+      "node": "./si/index.js",
+      "development": {
+        "import": {
+          "types": "./si/index.d.ts",
+          "default": "./si/index.js"
+        },
+        "require": "./si/index.cjs",
+        "browser": "./si/index.js",
+        "node": "./si/index.js",
+        "default": "./si/index.js",
+        "solid": "./si/index.js"
+      },
+      "browser": "./si/index.js",
+      "import": {
+        "types": "./si/index.d.ts",
+        "default": "./si/index.js"
+      },
+      "require": "./si/index.cjs",
+      "default": "./si/index.js",
+      "solid": "./si/index.js"
+    },
+    "./ti": {
+      "worker": {
+        "import": {
+          "types": "./ti/index.d.ts",
+          "default": "./ti/index.js"
+        },
+        "require": "./ti/index.cjs",
+        "browser": "./ti/index.js",
+        "node": "./ti/index.js",
+        "default": "./ti/index.js",
+        "solid": "./ti/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./ti/index.d.ts",
+          "default": "./ti/index.js"
+        },
+        "require": "./ti/index.cjs",
+        "browser": "./ti/index.js",
+        "node": "./ti/index.js",
+        "default": "./ti/index.js",
+        "solid": "./ti/index.js"
+      },
+      "node": "./ti/index.js",
+      "development": {
+        "import": {
+          "types": "./ti/index.d.ts",
+          "default": "./ti/index.js"
+        },
+        "require": "./ti/index.cjs",
+        "browser": "./ti/index.js",
+        "node": "./ti/index.js",
+        "default": "./ti/index.js",
+        "solid": "./ti/index.js"
+      },
+      "browser": "./ti/index.js",
+      "import": {
+        "types": "./ti/index.d.ts",
+        "default": "./ti/index.js"
+      },
+      "require": "./ti/index.cjs",
+      "default": "./ti/index.js",
+      "solid": "./ti/index.js"
+    },
+    "./hi": {
+      "worker": {
+        "import": {
+          "types": "./hi/index.d.ts",
+          "default": "./hi/index.js"
+        },
+        "require": "./hi/index.cjs",
+        "browser": "./hi/index.js",
+        "node": "./hi/index.js",
+        "default": "./hi/index.js",
+        "solid": "./hi/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./hi/index.d.ts",
+          "default": "./hi/index.js"
+        },
+        "require": "./hi/index.cjs",
+        "browser": "./hi/index.js",
+        "node": "./hi/index.js",
+        "default": "./hi/index.js",
+        "solid": "./hi/index.js"
+      },
+      "node": "./hi/index.js",
+      "development": {
+        "import": {
+          "types": "./hi/index.d.ts",
+          "default": "./hi/index.js"
+        },
+        "require": "./hi/index.cjs",
+        "browser": "./hi/index.js",
+        "node": "./hi/index.js",
+        "default": "./hi/index.js",
+        "solid": "./hi/index.js"
+      },
+      "browser": "./hi/index.js",
+      "import": {
+        "types": "./hi/index.d.ts",
+        "default": "./hi/index.js"
+      },
+      "require": "./hi/index.cjs",
+      "default": "./hi/index.js",
+      "solid": "./hi/index.js"
+    },
+    "./cg": {
+      "worker": {
+        "import": {
+          "types": "./cg/index.d.ts",
+          "default": "./cg/index.js"
+        },
+        "require": "./cg/index.cjs",
+        "browser": "./cg/index.js",
+        "node": "./cg/index.js",
+        "default": "./cg/index.js",
+        "solid": "./cg/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./cg/index.d.ts",
+          "default": "./cg/index.js"
+        },
+        "require": "./cg/index.cjs",
+        "browser": "./cg/index.js",
+        "node": "./cg/index.js",
+        "default": "./cg/index.js",
+        "solid": "./cg/index.js"
+      },
+      "node": "./cg/index.js",
+      "development": {
+        "import": {
+          "types": "./cg/index.d.ts",
+          "default": "./cg/index.js"
+        },
+        "require": "./cg/index.cjs",
+        "browser": "./cg/index.js",
+        "node": "./cg/index.js",
+        "default": "./cg/index.js",
+        "solid": "./cg/index.js"
+      },
+      "browser": "./cg/index.js",
+      "import": {
+        "types": "./cg/index.d.ts",
+        "default": "./cg/index.js"
+      },
+      "require": "./cg/index.cjs",
+      "default": "./cg/index.js",
+      "solid": "./cg/index.js"
+    },
+    "./tb": {
+      "worker": {
+        "import": {
+          "types": "./tb/index.d.ts",
+          "default": "./tb/index.js"
+        },
+        "require": "./tb/index.cjs",
+        "browser": "./tb/index.js",
+        "node": "./tb/index.js",
+        "default": "./tb/index.js",
+        "solid": "./tb/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./tb/index.d.ts",
+          "default": "./tb/index.js"
+        },
+        "require": "./tb/index.cjs",
+        "browser": "./tb/index.js",
+        "node": "./tb/index.js",
+        "default": "./tb/index.js",
+        "solid": "./tb/index.js"
+      },
+      "node": "./tb/index.js",
+      "development": {
+        "import": {
+          "types": "./tb/index.d.ts",
+          "default": "./tb/index.js"
+        },
+        "require": "./tb/index.cjs",
+        "browser": "./tb/index.js",
+        "node": "./tb/index.js",
+        "default": "./tb/index.js",
+        "solid": "./tb/index.js"
+      },
+      "browser": "./tb/index.js",
+      "import": {
+        "types": "./tb/index.d.ts",
+        "default": "./tb/index.js"
+      },
+      "require": "./tb/index.cjs",
+      "default": "./tb/index.js",
+      "solid": "./tb/index.js"
+    },
+    "./oc": {
+      "worker": {
+        "import": {
+          "types": "./oc/index.d.ts",
+          "default": "./oc/index.js"
+        },
+        "require": "./oc/index.cjs",
+        "browser": "./oc/index.js",
+        "node": "./oc/index.js",
+        "default": "./oc/index.js",
+        "solid": "./oc/index.js"
+      },
+      "deno": {
+        "import": {
+          "types": "./oc/index.d.ts",
+          "default": "./oc/index.js"
+        },
+        "require": "./oc/index.cjs",
+        "browser": "./oc/index.js",
+        "node": "./oc/index.js",
+        "default": "./oc/index.js",
+        "solid": "./oc/index.js"
+      },
+      "node": "./oc/index.js",
+      "development": {
+        "import": {
+          "types": "./oc/index.d.ts",
+          "default": "./oc/index.js"
+        },
+        "require": "./oc/index.cjs",
+        "browser": "./oc/index.js",
+        "node": "./oc/index.js",
+        "default": "./oc/index.js",
+        "solid": "./oc/index.js"
+      },
+      "browser": "./oc/index.js",
+      "import": {
+        "types": "./oc/index.d.ts",
+        "default": "./oc/index.js"
+      },
+      "require": "./oc/index.cjs",
+      "default": "./oc/index.js",
+      "solid": "./oc/index.js"
+    }
+  }
+}
