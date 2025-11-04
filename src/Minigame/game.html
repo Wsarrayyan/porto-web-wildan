@@ -1,0 +1,300 @@
+<!-- client.html (updated) -->
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Who's the Killer? (Client)</title>
+    <style>
+        body {
+            font-family: Arial;
+            display: flex;
+            gap: 16px;
+            padding: 12px;
+            transition: background 300ms ease;
+        }
+
+        /* day / night theme */
+        body.day {
+            background: #f5fff9;
+        }
+
+        body.night {
+            background: #0b1b2b;
+            color: #e6f3ff;
+        }
+
+        #left {
+            width: 320px;
+        }
+
+        #chat {
+            width: 420px;
+        }
+
+        .player {
+            padding: 6px;
+            border: 1px solid #ddd;
+            margin: 6px 0;
+        }
+
+        .alive {
+            background: #f8fff0;
+        }
+
+        .dead {
+            background: #f8f0f0;
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        .log {
+            font-size: 12px;
+            color: #666;
+        }
+
+        button {
+            margin: 4px;
+        }
+
+        .role-info {
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .small {
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body class="day">
+    <div id="left">
+        <h3>Connection</h3>
+        <input id="host" placeholder="ws://HOST:6789" value="ws://localhost:6789" style="width:100%" />
+        <input id="name" placeholder="Your name" style="width:100%" />
+        <button id="btnConnect">Connect</button>
+        <button id="btnJoin">Join Lobby</button>
+        <button id="btnStart">Start (host)</button>
+        <h3>Players</h3>
+        <div id="players"></div>
+        <h3>Your Role</h3>
+        <div id="role">-</div>
+        <div id="roleMeta" class="role-info"></div>
+        <div id="actions"></div>
+        <h4>Phase: <span id="phase">lobby</span></h4>
+    </div>
+
+    <div id="chat">
+        <h3>Chat / Log</h3>
+        <div id="log" style="height:400px; overflow:auto; border:1px solid #ccc; padding:6px"></div>
+        <input id="chattext" style="width:80%" />
+        <button id="send">Send</button>
+    </div>
+
+    <script>
+        let ws = null;
+        let myId = null;
+        let myRole = null;
+        let players = {}; // id -> {name,alive,mark}
+        // personal meta
+        let heals_left = 0;
+        let self_heal_used = false;
+        let seer_checks_left = 0;
+
+        document.getElementById('btnConnect').onclick = () => {
+            const url = document.getElementById('host').value;
+            ws = new WebSocket(url);
+            ws.onopen = () => appendLog("Connected to server");
+            ws.onmessage = (ev) => {
+                const msg = JSON.parse(ev.data);
+                handle(msg);
+            };
+            ws.onclose = () => appendLog("Disconnected");
+        };
+        document.getElementById('btnJoin').onclick = () => {
+            const name = document.getElementById('name').value || "Player";
+            ws.send(JSON.stringify({ type: "join", name }));
+        };
+        document.getElementById('btnStart').onclick = () => {
+            ws.send(JSON.stringify({ type: "start_request" }));
+        };
+        document.getElementById('send').onclick = () => {
+            const t = document.getElementById('chattext').value;
+            ws.send(JSON.stringify({ type: "chat", text: t }));
+            document.getElementById('chattext').value = "";
+        };
+        function appendLog(s) { const d = document.getElementById('log'); d.innerHTML += "<div class='log'>" + s + "</div>"; d.scrollTop = d.scrollHeight; }
+
+        function rerenderPlayers() {
+            const el = document.getElementById('players'); el.innerHTML = "";
+            for (const id in players) {
+                const p = players[id];
+                const div = document.createElement('div');
+                div.className = "player " + (p.alive ? "alive" : "dead");
+                div.innerHTML = `<b>${p.name}</b> (id:${id}) ${p.mark || ''} ${p.revealedRole ? '<div class="small">role: '+p.revealedRole+'</div>' : ''}`;
+                // buttons: vote / action select
+                const btnVote = document.createElement('button');
+                btnVote.textContent = "Vote";
+                btnVote.onclick = () => ws.send(JSON.stringify({ type: "vote", target: parseInt(id) }));
+                div.appendChild(btnVote);
+                el.appendChild(div);
+            }
+        }
+
+        function handle(msg) {
+            if (msg.type == "connected") {
+                myId = msg.your_id;
+                appendLog("Your id: " + myId);
+            } else if (msg.type == "lobby_update") {
+                document.getElementById('phase').textContent = "lobby";
+                document.body.className = "day";
+                const list = msg.players;
+                players = {};
+                list.forEach(p => players[p.id] = { name: p.name, alive: p.alive });
+                rerenderPlayers();
+            } else if (msg.type == "assign_role") {
+                myRole = msg.role;
+                heals_left = msg.heals_left || 0;
+                seer_checks_left = msg.seer_checks_left || 0;
+                self_heal_used = false;
+                document.getElementById('role').textContent = myRole;
+                updateRoleMeta();
+                appendLog("Your role assigned (private).");
+                renderActions();
+            } else if (msg.type == "role_update") {
+                // private updates (heals left / seer checks left)
+                if (msg.heals_left !== undefined) heals_left = msg.heals_left;
+                if (msg.self_heal_used !== undefined) self_heal_used = msg.self_heal_used;
+                if (msg.seer_checks_left !== undefined) seer_checks_left = msg.seer_checks_left;
+                updateRoleMeta();
+                renderActions();
+            } else if (msg.type == "state") {
+                document.getElementById('phase').textContent = msg.phase;
+                // theme
+                document.body.className = (msg.phase == "night") ? "night" : "day";
+                // update players
+                msg.players.forEach(p => {
+                    players[p.id] = players[p.id] || { name: p.name };
+                    players[p.id].alive = p.alive;
+                    // if server reveals role on death, server will send eliminate/roles_revealed messages handled elsewhere
+                });
+                rerenderPlayers();
+                renderActions();
+            } else if (msg.type == "chat") {
+                appendLog(msg.from + ": " + msg.text);
+            } else if (msg.type == "eliminate") {
+                appendLog(`=> ${msg.name} eliminated (${msg.by}). role: ${msg.role || 'unknown'}`);
+                // mark player as dead and reveal role if provided
+                const pid = msg.id;
+                if (players[pid]) {
+                    players[pid].alive = false;
+                    if (msg.role) players[pid].revealedRole = msg.role;
+                }
+                rerenderPlayers();
+            } else if (msg.type == "seer_result") {
+                const pid = msg.target_id;
+                if (players[pid]) players[pid].mark = msg.mark;
+                rerenderPlayers();
+                appendLog("Seer reveals: player " + pid + " marked " + msg.mark);
+            } else if (msg.type == "game_over") {
+                appendLog("Game Over! Winner: " + msg.winner);
+            } else if (msg.type == "roles_revealed") {
+                appendLog("All roles revealed:");
+                (msg.roles || []).forEach(r => {
+                    appendLog(`- ${r.id} (${r.name}) => ${r.role}`);
+                    if (players[r.id]) players[r.id].revealedRole = r.role;
+                });
+                rerenderPlayers();
+            } else if (msg.type == "error") {
+                appendLog("[error] " + msg.message);
+            } else if (msg.type == "action_ack") {
+                appendLog("Action registered: " + msg.action);
+            } else if (msg.type == "vote_ack") {
+                appendLog("Vote registered for: " + msg.target);
+            }
+        }
+
+        function updateRoleMeta() {
+            const el = document.getElementById('roleMeta');
+            el.innerHTML = "";
+            if (!myRole) return;
+            let html = "";
+            if (myRole == "doctor") {
+                html += `Heals left: ${heals_left} ${self_heal_used ? "(self-heal used)" : ""}<br/>Doctor auto-heals a victim at night (no target needed).`;
+            } else if (myRole == "seer") {
+                html += `Seer checks left this night: ${seer_checks_left}<br/>(max 3 per night)`;
+            }
+            el.innerHTML = html;
+        }
+
+        function renderActions() {
+            const act = document.getElementById('actions'); act.innerHTML = "";
+            if (!myRole) return;
+            const phase = document.getElementById('phase').textContent;
+
+            // Doctor: auto-heal during night (no ID)
+            if (myRole == "doctor") {
+                const btn = document.createElement('button');
+                btn.textContent = "Heal (Night) — Auto";
+                btn.disabled = !(phase == "night" && heals_left > 0 && isAlive());
+                btn.onclick = () => {
+                    ws.send(JSON.stringify({ type: "action", action: "heal" }));
+                };
+                act.appendChild(btn);
+            }
+
+            // Guess (blackjack/whitejack) active during discussion or voting? Keep as discussion
+            if (["blackjack", "whitejack"].includes(myRole)) {
+                const btn = document.createElement('button');
+                btn.textContent = "Use Guess (Discussion)";
+                btn.disabled = !(phase == "discussion" && isAlive());
+                btn.onclick = () => {
+                    const target = prompt("Target player id to guess?");
+                    const guess = prompt("Tebak kategori: good OR evil?");
+                    const extra = (guess == "good") ? "villager" : "killer";
+                    ws.send(JSON.stringify({
+                        type: "action",
+                        action: "guess",
+                        target: parseInt(target),
+                        extra
+                    }));
+                };
+                act.appendChild(btn);
+            }
+
+            // Seer: only night, up to 3 per night
+            if (myRole == "seer") {
+                const btn = document.createElement('button');
+                btn.textContent = `Use Seer (Night) — left: ${seer_checks_left}`;
+                btn.disabled = !(phase == "night" && seer_checks_left > 0 && isAlive());
+                btn.onclick = () => {
+                    const target = prompt("Target player id to inspect?");
+                    ws.send(JSON.stringify({ type: "action", action: "seer", target: parseInt(target) }));
+                };
+                act.appendChild(btn);
+            }
+
+            // Killers
+            if (myRole == "killer" || myRole == "blackjack") {
+                const btn = document.createElement('button');
+                btn.textContent = "Kill (Night)";
+                btn.disabled = !(phase == "night" && isAlive());
+                btn.onclick = () => {
+                    const target = prompt("Target player id to kill?");
+                    ws.send(JSON.stringify({ type: "action", action: "kill", target: parseInt(target) }));
+                };
+                act.appendChild(btn);
+            }
+        }
+
+        function isAlive() {
+            if (!myId) return false;
+            const p = players[myId];
+            return p ? !!p.alive : true;
+        }
+    </script>
+</body>
+
+</html>
